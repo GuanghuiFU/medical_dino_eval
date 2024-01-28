@@ -19,6 +19,7 @@ This repository hosts the code for our research, which concentrates on applying 
 ## Related codes
 
 1. DINOv2 [1]: https://github.com/facebookresearch/dinov2
+2. TorchVision: https://pytorch.org/vision/stable/models.html
 
 ## Related public dataset
 
