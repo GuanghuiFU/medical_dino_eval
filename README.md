@@ -24,7 +24,7 @@ If you use this material, we would appreciate if you could cite the following re
 
 ## Related codes
 
-1. **DINOv2** [1]: https://github.com/facebookresearch/dinov2
+1. **[DINOv2](<https://github.com/facebookresearch/dinov2>)** [1]: https://github.com/facebookresearch/dinov2
 
 We use the pretrained DINOv2 classifiers that loaded via PyTorch Hub:
 ```python
@@ -35,7 +35,7 @@ dinov2_vitb14_lc = torch.hub.load('facebookresearch/dinov2', 'dinov2_vitb14_lc')
 dinov2_vitl14_lc = torch.hub.load('facebookresearch/dinov2', 'dinov2_vitl14_lc')
 ```
 
-2. **TorchVision**: https://pytorch.org/vision/stable/models.html
+2. **[TorchVision](<https://pytorch.org/vision/stable/models.html>)**: https://pytorch.org/vision/stable/models.html
 
 We use the ImageNet pretrained weighted for different models:
 ```python
@@ -46,7 +46,7 @@ resnet_model = models.resnet50(pretrained=True)
 densenet_model = models.densenet121(pretrained=True)
 ```
 
-## Related public dataset
+## Related public datasets
 
 1. **Chest X-ray [2]:** https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia
 2. **iChallenge-AMD (Eye funds) [3]:** iChallenge-AMD-Training 400: 

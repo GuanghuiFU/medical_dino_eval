@@ -1,8 +1,11 @@
 import re
 import os
+
+
 def read_text_from_file(file_path):
     with open(file_path, 'r') as file:
         return file.read()
+
 
 def convert_metric_to_percentage(metric):
     # Extract the main value and the confidence interval
@@ -12,6 +15,7 @@ def convert_metric_to_percentage(metric):
     interval_values = interval.split(', ')
     interval_percentage = f"[{float(interval_values[0]) * 100:.2f}, {float(interval_values[1]) * 100:.2f}]"
     return f"{main_value_percentage} {interval_percentage}"
+
 
 def convert_to_latex_table(text):
     tasks = text.strip().split("Task:")
@@ -38,6 +42,7 @@ def convert_to_latex_table(text):
 
     latex_table += "\\end{tabular}\n\\caption{Performance Metrics}\n\\end{table}"
     return latex_table
+
 
 # 替换成您的文件路径
 average_type = 'weighted'
