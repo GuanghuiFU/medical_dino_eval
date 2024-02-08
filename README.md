@@ -25,6 +25,7 @@ If you use this material, we would appreciate if you could cite the following re
 ## Related codes
 
 1. **DINOv2** [1]: https://github.com/facebookresearch/dinov2
+
 We use the pretrained DINOv2 classifiers that loaded via PyTorch Hub:
 ```python
 import torch
@@ -35,6 +36,7 @@ dinov2_vitl14_lc = torch.hub.load('facebookresearch/dinov2', 'dinov2_vitl14_lc')
 ```
 
 2. **TorchVision**: https://pytorch.org/vision/stable/models.html
+
 We use the ImageNet pretrained weighted for different models:
 ```python
 from torchvision import models
