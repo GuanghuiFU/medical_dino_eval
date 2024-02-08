@@ -1,5 +1,5 @@
 from sklearn.metrics import precision_score, recall_score, f1_score
-from biu_dino.utils import *
+from utils import *
 import glob
 
 num_classes = 3  # Update this to match the number of classes in your dataset

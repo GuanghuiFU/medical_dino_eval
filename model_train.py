@@ -1,5 +1,5 @@
 import argparse
-from biu_dino.utils import *
+from utils import *
 import time
 torch.manual_seed(1)
 random.seed(1)
