@@ -373,13 +373,20 @@ class CustomSampler(Sampler):
 
 # Model
 class DinoModel(torch.nn.Module):
-    def __init__(self, dino_model, num_features, num_classes):
+    def __init__(self, dino_model, num_features, num_classes, freeze_dino_model=False):
         super(DinoModel, self).__init__()
         self.dino_model = dino_model
-        self.classifier = torch.nn.Linear(num_features, num_classes)
+        self.classifier = nn.Sequential(
+            nn.Linear(num_features, 256),
+            nn.ReLU(),
+            nn.Linear(256, num_classes)
+        )
+
+        if freeze_dino_model:
+            for param in self.dino_model.parameters():
+                param.requires_grad = False
 
     def forward(self, x):
         x = self.dino_model(x)
-        x = x.flatten(start_dim=1)
         x = self.classifier(x)
         return x

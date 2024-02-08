@@ -25,7 +25,24 @@ If you use this material, we would appreciate if you could cite the following re
 ## Related codes
 
 1. **DINOv2** [1]: https://github.com/facebookresearch/dinov2
+We use the pretrained DINOv2 classifiers that loaded via PyTorch Hub:
+```python
+import torch
+# DINOv2
+dinov2_vits14_lc = torch.hub.load('facebookresearch/dinov2', 'dinov2_vits14_lc')
+dinov2_vitb14_lc = torch.hub.load('facebookresearch/dinov2', 'dinov2_vitb14_lc')
+dinov2_vitl14_lc = torch.hub.load('facebookresearch/dinov2', 'dinov2_vitl14_lc')
+```
+
 2. **TorchVision**: https://pytorch.org/vision/stable/models.html
+We use the ImageNet pretrained weighted for different models:
+```python
+from torchvision import models
+# Pretrained models
+vgg_model = models.vgg16(pretrained=True)
+resnet_model = models.resnet50(pretrained=True)
+densenet_model = models.densenet121(pretrained=True)
+```
 
 ## Related public dataset
 
@@ -38,7 +55,7 @@ If you use this material, we would appreciate if you could cite the following re
 
 ## References
 
-1. Oquab, Maxime, et al. "Dinov2: Learning robust visual features without supervision." *arXiv preprint arXiv:2304.07193* (2023).
+1. Oquab, Maxime, et al. "DINOv2: Learning robust visual features without supervision." *arXiv preprint arXiv:2304.07193* (2023).
 2. Kermany, Daniel S., et al. "Identifying medical diagnoses and treatable diseases by image-based deep learning." *cell* 172.5 (2018): 1122-1131.
 3. Orlando, José Ignacio, et al. "Refuge challenge: A unified framework for evaluating automated methods for glaucoma assessment from fundus photographs." *Medical image analysis* 59 (2020): 101570.
 4. Tschandl, Philipp, Cliff Rosendahl, and Harald Kittler. "The HAM10000 dataset, a large collection of multi-source dermatoscopic images of common pigmented skin lesions." *Scientific data* 5.1 (2018): 1-9.
