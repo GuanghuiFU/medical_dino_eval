@@ -13,14 +13,14 @@ If you use this material, we would appreciate if you could cite the following re
   year={2024}
 }
 ```
-## Code explanations
 
-* `utils.py`: Basic files for various modules, including definition of data sets, model definition, data partitioning, model training, etc.
-* `model_train.py`: model training file
-* `train_script.py`: Batch training model
-* `inference_biu.py`: Test the trained model on the test set and save the results to
-* `eval_biu.py`: Model verification module, uses 95% bootstrap confidence interval as verification, and calculates Precision, recall, and F1-score in a weighted average way. Save the final performance into a txt file for generating LaTex files
-* `perf2latex.py`: Read performance txt files and generate LaTex files
+## Code explanations
+* `main_script_train.py`: build model training scripts, you can easily set up and let the code run.
+* `train_model.py`: model training function, the dataset setting is here
+* `utils.py`: basic files for various modules, including definition of data sets, model definition, data partitioning, model training, etc.
+* `inference_biu.py`: inference the trained model on the test set and save the results for evaluation
+* `eval_biu.py`: model evaluation module, uses 95% bootstrap confidence interval, and calculates Precision, recall, and F1-score in a weighted average way. Save the final performance into a txt file for generating LaTex files
+* `perf2latex.py`: read performance txt files and generate LaTex files
 
 ## Related codes
 

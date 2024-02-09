@@ -8,15 +8,24 @@ def main():
     args = get_arguments()
     local_time = time.strftime('%Y%m%d-%H%M', time.localtime())
     args.local_time = local_time
-    categories, img_channel, trainset, valset = create_dataset()
+    '''
+    Set up the train set. The code will automatically split train and validation set by 8:2. So you only need to give the folder with different categories.
+    For example, the ChestX-ray dataset (https://www.kaggle.com/datasets/paultimothymooney/chest-xray-pneumonia) 
+    already split the train and test set, so we just need to put the two categories (normal, pneumonia) as below, and give them the label tag (0, 1).
+    '''
+    paths_labels = {
+        '/Users/fuguanghui/Downloads/Dataset/chest_xray/train/NORMAL': 0,
+        '/Users/fuguanghui/Downloads/Dataset/chest_xray/train/PNEUMONIA': 1,
+    }
+    categories, img_channel, trainset, valset = create_dataset(paths_labels)
     args.categories = categories
-    percentage = args.train_ratio
-    if percentage != 1.0:
+    subset_ratio = args.subset_ratio
+    if subset_ratio != 1.0: # if you want to try different percentage of train/val dataset, you can use this setting. Note that this is not for train, test split, this is for use part of training set for experiment.
         train_dataset, val_dataset = trainset, valset
         print('Train set original:', len(train_dataset))
         print('Val set original:', len(val_dataset))
-        train_subset = create_subset(train_dataset, percentage=percentage)
-        val_subset = create_subset(val_dataset, percentage=percentage)
+        train_subset = create_subset(train_dataset, subset_ratio)
+        val_subset = create_subset(val_dataset, subset_ratio)
         print('train_subset set original:', len(train_subset))
         print('val_subset set original:', len(val_subset))
         # val_subset = val_dataset # For EyeFundus, we load the full validation set
@@ -39,18 +48,18 @@ def main():
 
 def get_arguments():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--dataset_name', type=str, default="BIUDataset", choices=('BIUDataset'))
+    parser.add_argument('--dataset_name', type=str, default="chest_xray", choices=('chest_xray', 'eye_fund', 'skin_dermoscopy'))
     parser.add_argument('--batch_size', type=int, default=64)
     parser.add_argument('--num_workers', type=int, default=0)
-    parser.add_argument('--machine', type=str, default="PC", choices=('PC', 'Mac'))
+    parser.add_argument('--machine', type=str, default="Cluster", choices=('Cluster', 'Mac'))
     parser.add_argument('--model_name', type=str, default="VGG16", choices=('VGG16', 'ResNet', 'DenseNet', 'Dino_s', 'Dino_b', 'Dino_l'))
     parser.add_argument('--pretrain', action="store_true")
     parser.add_argument('--freeze', action="store_true")
     parser.add_argument('--optimizer_name', type=str, default="Adam", choices=('SGD', 'Adam'))
     parser.add_argument('--learning_rate', default=1e-4, type=float)
     parser.add_argument('--momentum', default=0.9, type=float)
-    parser.add_argument('--num_epochs', default=300, type=int)
-    parser.add_argument('--train_ratio', default=1.0, type=float)
+    parser.add_argument('--num_epochs', default=100, type=int)
+    parser.add_argument('--subset_ratio', default=1.0, type=float) # if you want to try different percentage of train/val dataset, you can use this setting. Note that this is not for train, test split, this is for use part of training set for experiment.
     args = parser.parse_args()
     return args
 

@@ -3,7 +3,6 @@ import errno
 import random
 import torch
 import csv
-
 torch.manual_seed(1)
 random.seed(1)
 import numpy as np
@@ -249,12 +248,8 @@ def train_model(args, model, optimizer, criterion, categories, trainloader, vall
 
 
 # Dataset
-def create_dataset():
-    category1_train_path = "/your/train_dataset/category1"
-    category2_train_path = "/your/train_dataset/category2"
-    category3_train_path = "/your/train_dataset/category3"
-    biu_dataset = BIUDataset(category1_train_path, category2_train_path, category3_train_path,
-                             transform=transform_medical)
+def create_dataset(paths_labels):
+    biu_dataset = BIUDataset(paths_labels, transform=transform_medical)
     # Split the training set into train and validation in 8:2
     train_size = int(0.8 * len(biu_dataset))
     val_size = len(biu_dataset) - train_size
@@ -273,12 +268,11 @@ def create_loader(args, trainset, valset):
 
 
 class BIUDataset(Dataset):
-    def __init__(self, stage2_path, stage3_path, stage4_path, transform=None):
+    def __init__(self, paths_labels, transform=None):
         self.transform = transform
-        self.stage2_images = [(os.path.join(stage2_path, img), 0) for img in os.listdir(stage2_path)]
-        self.stage3_images = [(os.path.join(stage3_path, img), 1) for img in os.listdir(stage3_path)]
-        self.stage4_images = [(os.path.join(stage4_path, img), 2) for img in os.listdir(stage4_path)]
-        self.images = self.stage2_images + self.stage3_images + self.stage4_images
+        self.images = []
+        for path, label in paths_labels.items():
+            self.images.extend([(os.path.join(path, img), label) for img in os.listdir(path)])
         random.shuffle(self.images)
 
     def __len__(self):
@@ -292,13 +286,13 @@ class BIUDataset(Dataset):
         return image, label
 
 
+# This is almost the same as the BIUDataset class, except that it returns one more item, the image name, for model inference.
 class BIUDataset_name(Dataset):
-    def __init__(self, stage2_path, stage3_path, stage4_path, transform=None):
+    def __init__(self, paths_labels, transform=None):
         self.transform = transform
-        self.stage2_images = [(os.path.join(stage2_path, img), 0) for img in os.listdir(stage2_path)]
-        self.stage3_images = [(os.path.join(stage3_path, img), 1) for img in os.listdir(stage3_path)]
-        self.stage4_images = [(os.path.join(stage4_path, img), 2) for img in os.listdir(stage4_path)]
-        self.images = self.stage2_images + self.stage3_images + self.stage4_images
+        self.images = []
+        for path, label in paths_labels.items():
+            self.images.extend([(os.path.join(path, img), label) for img in os.listdir(path)])
         random.shuffle(self.images)
 
     def __len__(self):
@@ -312,8 +306,7 @@ class BIUDataset_name(Dataset):
             image = self.transform(image)
         return image, label, image_name
 
-
-def create_subset(dataset, percentage):
+def create_subset(dataset, subset_ratio):
     category_indices = {0: [], 1: [], 2: []}
 
     for idx, (_, label) in enumerate(dataset):
@@ -321,7 +314,7 @@ def create_subset(dataset, percentage):
 
     subset_indices = []
     for cat_indices in category_indices.values():
-        subset_size = int(len(cat_indices) * percentage)
+        subset_size = int(len(cat_indices) * subset_ratio)
         subset_indices.extend(cat_indices[:subset_size])
 
     random.shuffle(subset_indices)
