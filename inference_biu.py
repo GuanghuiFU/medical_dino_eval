@@ -13,8 +13,8 @@ model_name_list = ['VGG16', 'ResNet', 'DenseNet', 'Dino_s', 'Dino_b', 'Dino_l']
 for model_name in model_name_list:
     model_path_list = glob.glob(f'{model_base_path}/*_{model_name}_p*_best_{best_of}*.pt')
     paths_labels = {
-        '/Users/fuguanghui/Downloads/Dataset/chest_xray/test/NORMAL': 0,
-        '/Users/fuguanghui/Downloads/Dataset/chest_xray/test/PNEUMONIA': 1,
+        'your/dataset/path/chest_xray/test/NORMAL': 0,
+        'your/dataset/path/chest_xray/test/PNEUMONIA': 1,
     }
     # Load the images from the specified folder
     chest_xray_test_dataset = BIUDataset_name(paths_labels, transform=transform_medical)

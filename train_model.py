@@ -14,8 +14,8 @@ def main():
     already split the train and test set, so we just need to put the two categories (normal, pneumonia) as below, and give them the label tag (0, 1).
     '''
     paths_labels = {
-        '/Users/fuguanghui/Downloads/Dataset/chest_xray/train/NORMAL': 0,
-        '/Users/fuguanghui/Downloads/Dataset/chest_xray/train/PNEUMONIA': 1,
+        'your/dataset/path/chest_xray/train/NORMAL': 0,
+        'your/dataset/path/chest_xray/train/PNEUMONIA': 1,
     }
     categories, img_channel, trainset, valset = create_dataset(paths_labels)
     args.categories = categories
