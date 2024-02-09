@@ -44,7 +44,6 @@ def convert_to_latex_table(text):
     return latex_table
 
 
-# 替换成您的文件路径
 average_type = 'weighted'
 file_path = f'prediction/result-private_{average_type}.txt'
 basename = os.path.basename(file_path).replace('.txt', '')

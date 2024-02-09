@@ -3,7 +3,7 @@ from utils import *
 import glob
 
 model_base_path = f"your/model/path/dir"
-num_classes = 3  # Update this to match the number of classes in your dataset
+num_classes = 2  # Update this to match the number of classes in your dataset
 # Two kind of way to save the model, save base on best accuracy or best loss. In the result report part, I evaluate based on the best accuracy model
 best_of_list = ['accuracy', 'loss']
 best_of = best_of_list[0]
