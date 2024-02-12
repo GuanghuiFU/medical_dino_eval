@@ -4,15 +4,7 @@ This repository contains material associated to this [paper](#Citation).
 If you use this material, we would appreciate if you could cite the following reference.
 
 ## Citation
-* Yuning Huang, Jingchen Zou, Lanxi Meng, Xin Yue, Qing Zhao, Jianqiang Li, Changwei Song, Gabriel Jimenez, Shaowu Li, Guanghui Fu. Comparative Analysis of ImageNet Pre-Trained Deep Learning Models and DINOv2 in Medical Imaging Classification. Preprint.
-```
-@inproceedings{huang2024comparative,
-  title={Comparative Analysis of ImageNet Pre-Trained Deep Learning Models and DINOv2 in Medical Imaging Classification},
-  author={Huang, Yuning and Zou, Jingchen and Meng, Lanxi and Yue, Xin and Zhao, qing and Li, Jianqiang and Song, Changwei and Jimenez, Gabriel and Li, Shaowu and Fu, Guanghui},
-  booktitle={Preprint},
-  year={2024}
-}
-```
+* Anonymous authors. Comparative Analysis of ImageNet Pre-Trained Deep Learning Models and DINOv2 in Medical Imaging Classification. Preprint.
 
 ## Code explanations
 * [`main_script_train.py`](<main_script_train.py>): build model training scripts, you can easily set up and let the code run.
